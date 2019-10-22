@@ -1,3 +1,4 @@
+// Creates a string representation of a binary number of a specified bit size
 function binaryStringOf(num, bits = 32) {
 	if (num === "") {
 		throw new TypeError("The arguments can not be empty.");
@@ -42,6 +43,7 @@ function binaryStringOf(num, bits = 32) {
 	}
 }
 
+// Adds the HTML needed for the Booth's algorithm table headers
 function addTableHeaders() {
 	const tableElement = document.querySelector("thead");
 	tableElement.innerHTML = `<tr>\
@@ -52,6 +54,7 @@ function addTableHeaders() {
 	</tr>`;
 }
 
+// Adds an HTML row to the Booth's algorithm table
 function addRowToTable(
 	iterationNumber,
 	stepName,
@@ -95,11 +98,13 @@ function addRowToTable(
 	</tr>`;
 }
 
+// Empties the HTML table used for the Booth's algorithm visualization
 function clearTable() {
 	document.querySelector("thead").innerHTML = "";
 	document.querySelector("tbody").innerHTML = "";
 }
 
+// Returns the appropriate starting value for the product in Booth's algorithm
 function boothsAlgorithmInitialProduct(multiplicand, multiplier, bitSize) {
 	let product = multiplier;
 
@@ -116,22 +121,23 @@ function boothsAlgorithmInitialProduct(multiplicand, multiplier, bitSize) {
 	return product;
 }
 
+// Adds the multiplicand to the left half of the product
 function boothsAlgorithmAdd(multiplicand, product, bitSize) {
-	// Add the multiplicand to the left half of the product
 	multiplicand <<= bitSize + 1;
 	product += multiplicand;
 
 	return product;
 }
 
+// Subtracts the multiplicand from the left half of the product
 function boothsAlgorithmSubtract(multiplicand, product, bitSize) {
-	// Subtract the multiplicand from the left half of the product
 	multiplicand <<= bitSize + 1;
 	product -= multiplicand;
 
 	return product;
 }
 
+//
 function createBoothsAlgorithmTable(multiplicand, multiplier, bitSize) {
 	// Table Headers
 
@@ -194,16 +200,17 @@ function createBoothsAlgorithmTable(multiplicand, multiplier, bitSize) {
 		);
 	}
 
+	// Final (result) row
+
 	// Drop the last bit to get the real product result
 	product >>= 1;
 	const productBitSize = bitSize * 2;
 	const productString = binaryStringOf(product, productBitSize);
 	document.querySelector("tbody").innerHTML += `\
 	<tr><td colspan="4" style="text-align:right;"><b>RESULT: ${productString}</b></td></tr>`;
-
-	document.getElementById("decimal-output").textContent = product;
 }
 
+// Validates input and creates the Booth's algoritm table
 function onClickCreateTable() {
 	// Grab form data
 	let multiplicand = document.getElementById("multiplicand").value;
@@ -211,18 +218,25 @@ function onClickCreateTable() {
 	const bitSize = parseInt(document.querySelector("select").value);
 
 	try {
+		// Show the equation in binary
 		const multiplicandBinaryString = binaryStringOf(multiplicand, bitSize);
 		const multiplierBinaryString = binaryStringOf(multiplier, bitSize);
-		const result = binaryStringOf(multiplicand * multiplier, bitSize * 2);
-
+		const resultBinaryString = binaryStringOf(
+			multiplicand * multiplier,
+			bitSize * 2
+		);
 		document.getElementById(
 			"binary-preview"
-		).innerHTML = `<hr>Binary: ${multiplicandBinaryString} x ${multiplierBinaryString} = ${result}`;
+		).innerHTML = `<hr>Binary: ${multiplicandBinaryString} x ${multiplierBinaryString} = ${resultBinaryString}`;
 
 		clearTable();
 
 		multiplicand = parseInt(multiplicand);
 		multiplier = parseInt(multiplier);
+
+		// Show the decimal product
+		document.getElementById("decimal-output").textContent =
+			multiplicand * multiplier;
 
 		// Clear out any previous error warning if there was one
 		const warningMsgElmement = document.getElementById("warning-message");
