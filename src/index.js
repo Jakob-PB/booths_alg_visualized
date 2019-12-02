@@ -14,7 +14,7 @@ function binaryStringOf(num, bits = 32) {
 		throw new TypeError(`The argument "${num}" is not an integer.`);
 	}
 
-	// Integer range is 2^bits minus one for the signed bit
+	// Positive integer range is 2^bits minus one for the signed bit
 	const rangeMax = 2 ** (bits - 1) - 1;
 	const rangeMin = -(2 ** (bits - 1));
 
