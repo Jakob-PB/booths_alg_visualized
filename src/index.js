@@ -227,7 +227,7 @@ function onClickCreateTable() {
         );
         document.getElementById(
             "binary-preview"
-        ).innerHTML = `<hr>Binary: ${multiplicandBinaryString} x ${multiplierBinaryString} = ${resultBinaryString}`;
+        ).innerHTML = `<hr>Binary (signed): ${multiplicandBinaryString} x ${multiplierBinaryString} = ${resultBinaryString}`;
 
         clearTable();
 
