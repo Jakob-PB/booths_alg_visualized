@@ -1,33 +1,27 @@
 module.exports = {
-	env: {
-		es6: true,
-		node: true,
-		browser: true
-	},
-	extends: ["airbnb", "prettier"],
-	globals: {
-		Atomics: "readonly",
-		SharedArrayBuffer: "readonly"
-	},
-	parserOptions: {
-		ecmaVersion: 2018,
-		sourceType: "module"
-	},
-	rules: {
-		// 0 = "off", 1 = "warn", 2 = "error"
-		"max-len": [1, 120, 2, { ignoreComments: true }],
-		// "quote-props": [1, "consistent-as-needed"],
-		"no-else-return": 0, // This is just dumb and favors slightly less typing over clarity.
-		"no-bitwise": 0, // Just for the bitwise stuff needed in the CS project.
-		"no-console": 0, // When on it makes warnings ignorable because they are always there. Default is bad.
-		// "no-param-reassign": ["error", { props: false }],
-		"no-param-reassign": 0, // Dumb overcompensation
-		"prefer-const": 1, // Distracting as an error
-		"no-unused-vars": [1, { vars: "local", args: "none" }], // Distracting as an error
-		"no-plusplus": 0, // No semicolon is a stupid reason to remove this classic operator
-		"operator-assignment": 0,
-		"spaced-comment": 0,
-		radix: 0
-		//indent: ["error", "tab"]
-	}
+    env: {
+        es6: true,
+        node: true,
+        browser: true
+    },
+    extends: ["airbnb", "prettier"],
+    globals: {
+        Atomics: "readonly",
+        SharedArrayBuffer: "readonly"
+    },
+    parserOptions: {
+        ecmaVersion: 2018,
+        sourceType: "module"
+    },
+    // 0 = "off", 1 = "warn", 2 = "error"
+    rules: {
+        "max-len": 0, // Let Prettier handle this
+        "no-else-return": 0, // Turning this off as it favors slightly less typing over clarity.
+        "no-bitwise": 0, // Turn off just for the bitwise stuff needed in the CS project.
+        "no-param-reassign": 0, // This rule is an overcompensation for this project.
+        "prefer-const": 1, // Very distracting as an error, perfer this for a Git hook or CI.
+        "no-unused-vars": [1, { vars: "local", args: "none" }], // Distracting as an error, perfer this for a Git hook or CI.
+        "no-plusplus": [1, { allowForLoopAfterthoughts: true }], // Allow classic style for loops
+        "operator-assignment": 0 // Off for increased clarity
+    }
 };

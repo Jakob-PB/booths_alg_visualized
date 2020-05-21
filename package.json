@@ -1,7 +1,7 @@
 {
     "name": "booths_alg_visualized",
     "version": "1.0.0",
-    "description": "For random JavaScript tests.",
+    "description": "Small client side web project that visualizes Booth's Algorithm for bitwise multiplication .",
     "main": "src/index.js",
     "lint-staged": {
         "*.js": "eslint",
